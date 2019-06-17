@@ -4,10 +4,6 @@ import (
 	"errors"
 )
 
-type JwtToken struct {
-	Token string `bson:"jwttoken" json:"jwttoken"`
-}
-
 var (
 	id_q = "id = ?"
 )
