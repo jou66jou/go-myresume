@@ -28,21 +28,21 @@
 ```
 #**golang效能筆記:**
 
-##Pool
+##Pool<br>
 1.大連接或資料庫大量寫入時採用Pool避免漏失訊息，也能節省記憶體的創建又銷毀成本<br>
 2.用channel建立工作池，並建立排隊佇列<br>
 (code)<br>
 
-##記憶體
+##記憶體<br>
 1.注意記憶體逃逸，盡量不以傳址返回函數內部創造的變數<br>
 2.堆上分配會在GC時影響效能<br>
 
-##String
+##String<br>
 1.string為`struct{str *unsafe.Point, len int}`，因此string頻繁更改會重新指向造成GC回收負擔且效能降低。<br>
-2.大量合併或拼接時使用join或bytes.Buffer。<br>
-3.如果大量字串處理可考慮直接使用[]byte。<br>
+2.大量合併或拼接時使用`join`或`bytes.Buffer`。<br>
+3.如果大量字串處理可考慮直接使用`[]byte`。<br>
 
-##Map
+##Map<br>
 1.並發讀寫會出錯。<br>
 2.加入讀寫鎖`sync.RWMutex`。<br>
 3.超過四核心處理器的競爭鎖，建議使用`sync.Map`實現。<br>
