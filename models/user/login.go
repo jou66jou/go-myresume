@@ -24,7 +24,7 @@ func Login_user(user *User) (*User, error) {
 	if q.Error != nil {
 		return nil, errors.New("user login fail : can't find user id")
 	}
-	if user.decodePw(user.Pw) != nil {
+	if ru.decodePw(user.Pw) != nil {
 		return nil, errors.New("user login fail : can't find user password")
 	}
 	return ru, nil

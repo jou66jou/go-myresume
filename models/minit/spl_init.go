@@ -1,18 +1,16 @@
-package models
+package minit
 
 import (
 	"fmt"
 
+	_ "github.com/jinzhu/gorm/dialects/mysql"
+
 	"github.com/jinzhu/gorm"
 )
 
-var db *gorm.DB
+var DB *gorm.DB
 
-func init() {
-	Mysql_init()
-}
-
-func Mysql_init() {
+func Mysql_init() *gorm.DB {
 	var (
 		err                                  error
 		dbType, dbName, user, password, host = "mysql", "db", "test", "test", "127.0.0.1:3307"
@@ -21,8 +19,8 @@ func Mysql_init() {
 	for {
 		ScanDB_config(&dbType, &dbName, &user, &password, &host)
 
-		fmt.Println("Models: db ready to connect...")
-		db, err = gorm.Open(dbType, fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8&parseTime=True&loc=Local",
+		fmt.Println("Models: db ready to connect...", dbType)
+		DB, err = gorm.Open(dbType, fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8&parseTime=True&loc=Local",
 			user,
 			password,
 			host,
@@ -35,14 +33,14 @@ func Mysql_init() {
 		}
 	}
 
-	db.DB().SetMaxIdleConns(10)
-	db.DB().SetMaxOpenConns(100)
+	DB.DB().SetMaxIdleConns(10)
+	DB.DB().SetMaxOpenConns(100)
 	fmt.Println("Models: db connect success")
-
+	return DB
 }
 
 func CloseDB() {
-	defer db.Close()
+	defer DB.Close()
 }
 
 func ScanDB_config(dbType, dbName, user, password, host *string) {

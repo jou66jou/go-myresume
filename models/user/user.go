@@ -9,9 +9,9 @@ import (
 )
 
 type User struct {
-	Index    int    `sql:"primary_key";"AUTO_INCREMENT"`
+	Index    int    `sql:"AUTO_INCREMENT"`
 	Name     string `bson:"username" json:"username"`
-	Id       string `bson:"id" json:"id" sql:"not null;unique;type:varchar(32);unique_index`
+	Id       string `bson:"id" json:"id" sql:"primary_key";"not null;unique;type:varchar(32);unique_index`
 	Pw       string `bson:"pw" json:"pw" sql:"not null"`
 	Email    string `bson:"email" bson:"email sql:"not null;unique;type:varchar(120);unique_index"`
 	SignDate string `bson:"-" json:"-"`
@@ -25,12 +25,13 @@ var (
 	dbl = false
 )
 
-func initDB(odb *gorm.DB) {
+func InitDB(odb *gorm.DB) {
 	db = odb
 	dbl = true
 }
 
-func CreateUserTable() error {
+func (u *User) CreateUserTable() error {
+
 	if db.HasTable(&User{}) {
 		return errors.New("db can't create user table : has user table in db")
 	}
