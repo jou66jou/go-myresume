@@ -1,31 +1,31 @@
 ## gotest檔案說明
 
 ```
-├── debug //個人debug使用
-│   └── http.go //輸出request.body
+├── debug                       #個人debug使用
+│   └── http.go                 #輸出request.body
 ├── docker
 │   ├── nsq
-│   │   └── docker-compose.yml //nsq docker
+│   │   └── docker-compose.yml  #nsq docker
 │   └── sql
-│       └── docker-compose.yml //sql db docker
+│       └── docker-compose.yml  #sql db docker
 ├── main.go
-├── models //可直接引用模組
+├── models                      #可直接引用模組
 │   ├── auth
-│   │   └── middleware.go //jwt驗證
+│   │   └── middleware.go       #jwt驗證
 │   ├── helper
-│   │   ├── respjson.go //http response json
-│   │   └── router_register.go //註冊route
+│   │   ├── respjson.go         #http response json
+│   │   └── router_register.go  #註冊route
 │   ├── inisetting 
 │   │   ├── conf
-│   │   │   └── app.ini //config文件
-│   │   └── setting.go //config初始設定
-│   ├── spl_init.go //sql init
-│   └── user //一般使用者相關功能
-│       ├── login.go //登入
-│       ├── register.go //註冊
-│       └── user.go //結構與初始化
-└── practice //特定練習
-    └── syncmap.go //map併發讀寫
+│   │   │   └── app.ini         #config文件
+│   │   └── setting.go          #config初始設定
+│   ├── spl_init.go             #sql init
+│   └── user                    #一般使用者相關功能
+│       ├── login.go            #登入
+│       ├── register.go         #註冊
+│       └── user.go             #結構與初始化
+└── practice                    #特定練習
+    └── syncmap.go              #map併發讀寫
 ```
 
 
