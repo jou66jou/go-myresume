@@ -47,8 +47,8 @@
 2.加入讀寫鎖`sync.RWMutex`。<br>
 3.超過四核心處理器的競爭鎖，建議使用`sync.Map`實現。<br>
 
-##Slice
-1.考慮以下目的，將stu設置為字典中的值：
+##Slice<br>
+1.考慮以下目的，將stu設置為字典中的值：<br>
 ```go
 m := make(map[string]*student)
 stus := []student{
@@ -60,10 +60,10 @@ for _, stu := range stus {
     m[stu.Name] = &stu // 將stu設置為字典中的值
 }
 ```
-以上程式碼會造成m字典中的值皆為`&student[lastIndex]`，欲達成原本目的應將原碼改為：
+以上程式碼會造成m字典中的值皆為`&student[lastIndex]`，欲達成原本目的應將原碼改為：<br>
 ```go
 for i, v := range stus {
     m[v.Name] = &stus[i] // 將stus[i]設置為字典中的值
 }
 ```
-2.slice delete
+2.slice delete<br>
