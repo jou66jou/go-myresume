@@ -1,7 +1,7 @@
 ## gotest檔案說明
 
 ```
-├── debug
+├── debug //個人debug使用
 │   └── http.go //輸出request.body
 ├── docker
 │   ├── nsq
@@ -9,7 +9,7 @@
 │   └── sql
 │       └── docker-compose.yml //sql db docker
 ├── main.go
-├── models
+├── models //可直接引用模組
 │   ├── auth
 │   │   └── middleware.go //jwt驗證
 │   ├── helper
