@@ -16,6 +16,18 @@ func main() {
 	if err != nil {
 		fmt.Println(err)
 	}
-	user.Register_user(&u)
-	user.Login_user(&u)
+	result, err := u.FindUser()
+	if err != nil {
+		fmt.Println(err)
+		if err := u.Register(); err != nil {
+			fmt.Println(err)
+			return
+		}
+		result = u
+	}
+	testU := user.User{Id: "test", Pw: "test"}
+	err = result.CheckPw(testU.Pw)
+	if err != nil {
+		fmt.Println("ERROR:CheckPW :", err)
+	}
 }

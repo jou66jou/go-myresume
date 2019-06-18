@@ -21,9 +21,7 @@
 │   │   └── setting.go          # config初始設定
 │   ├── spl_init.go             # sql init
 │   └── user                    * 一般使用者相關功能
-│       ├── login.go            # 登入
-│       ├── register.go         # 註冊
-│       └── user.go             # 結構與初始化
+│       └── user.go             # 登入、註冊、查詢方法
 └── practice                    * 特定練習
     └── syncmap.go              # map併發讀寫
 ```
@@ -38,7 +36,7 @@
 
 ### 記憶體
 
-1. 注意記憶體逃逸，盡量不以傳址返回函數內部創造的變數
+1. 注意記憶體逃逸，函數除了大資料外不以傳址返回
 2. 堆上分配會在GC時影響效能
 
 ### String
