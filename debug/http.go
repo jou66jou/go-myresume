@@ -15,3 +15,12 @@ func PrintRequestBody(r *http.Request) {
 	}
 	fmt.Println(string(requestDump))
 }
+
+func PrintRespBody(r *http.Response) {
+
+	requestDump, e := httputil.DumpResponse(r, true)
+	if e != nil {
+		fmt.Println(e)
+	}
+	fmt.Println(string(requestDump))
+}
