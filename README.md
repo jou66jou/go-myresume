@@ -83,30 +83,30 @@ for i, v := range stus {
 }
 ```
 
-### RESTful API exsample
+### RESTful API 範例
 
 **/projects**
-* `GET` : Get all projects  
-* `POST` : Create a new project
+* `GET` : 取得全部project
+* `POST` : 建立新project
 
 **/projects/:title**
-* `GET` : Get a project
-* `PUT` : Update a project
-* `DELETE` : Delete a project
+* `GET` : 取得此project
+* `PUT` : 更新此project
+* `DELETE` : 刪除此project
 
 **/projects/:title/archive**  
-* `PUT` : Archive a project
-* `DELETE` : Restore a project
+* `PUT` : 封存此project
+* `DELETE` : 回復此project
 
 **/projects/:title/tasks**  
-* `GET` : Get all tasks of a project
-* `POST` : Create a new task in a project
+* `GET` : 取得此project所有任務
+* `POST` : 新增一個任務到此project
 
 **/projects/:title/tasks/:id**
-* `GET` : Get a task of a project
-* `PUT` : Update a task of a project
-* `DELETE` : Delete a task of a project
+* `GET` : 取得此project的該任務
+* `PUT` : 更新此project的該任務
+* `DELETE` : 刪除此project的該任務
 
 **/projects/:title/tasks/:id/complete**
-* PUT : Complete a task of a project
-* DELETE : Undo a task of a project
+* `PUT` : 將此project的該任務設為complete
+* `DELETE` : 將此project的該任務設為undo
