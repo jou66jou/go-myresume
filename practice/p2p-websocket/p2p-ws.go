@@ -1,4 +1,5 @@
-// 僅實作websocket方法的p2p簡易版本，完整實作請參考
+// 僅實作websocket方法的p2p簡易版本，完整實作請參考下面連結
+// https://github.com/jou66jou/go-p2p-websocket
 
 package main
 
