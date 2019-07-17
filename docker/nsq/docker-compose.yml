@@ -1,6 +1,6 @@
 nsqlookup:
   image: nsqio/nsq
-  hostname: nsqlookup
+  hostname: nl
   ports:
     - "4160:4160"
     - "4161:4161"
@@ -18,7 +18,7 @@ nsq:
 
 nsqadmin:
   image: nsqio/nsq
-  hostname: nsqadmin
+  hostname: nd
   links:
     - nsqlookup:nsqlookup
   ports:
