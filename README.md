@@ -24,9 +24,9 @@
 │   └── user                    * 一般使用者相關功能
 │       └── user.go             # 登入、註冊、查詢方法
 │── practice                    * 特定練習
-│   └── syncmap.go              # map併發讀寫
-│   └── p2p-websocket           # websocket模擬p2p
-│       └── p2p.ws.go 
+│   ├── syncmap.go              # map併發讀寫
+│   ├── p2p-websocket           # websocket模擬p2p
+│   │   └── p2p.ws.go 
 │   └── testinterface           # interface練習            
 ```
 
