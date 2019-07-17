@@ -8,7 +8,6 @@
 │   │   └── docker-compose.yml  # nsq docker
 │   └── sql
 │       └── docker-compose.yml  # sql db docker
-├── main.go
 ├── models                      * 可直接引用模組
 │   ├── auth
 │   │   └── middleware.go       # jwt驗證
@@ -27,7 +26,9 @@
 │   ├── syncmap.go              # map併發讀寫
 │   ├── p2p-websocket           # websocket模擬p2p
 │   │   └── p2p.ws.go 
-│   └── testinterface           # interface練習            
+│   └── testinterface           # interface練習      
+│
+└── studygolang.md              # golang中文社群回覆紀錄      
 ```
 
 
@@ -86,6 +87,11 @@ for i, v := range stus {
     m[v.Name] = &stus[i] // 將stus[i]設置為字典中的值
 }
 ```
+### Channel
+
+1. 非緩衝channel執行時，若沒有進入goroution會報錯`fatal error: all goroutines are asleep - deadlock!`。
+
+
 
 ### RESTful API 範例
 
