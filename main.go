@@ -15,8 +15,7 @@ type B struct {
 }
 
 type hub struct {
-	C1 chan interface{}
-	C2 chan interface{}
+	C chan interface{}
 }
 
 func do(c chan interface{}) {
@@ -27,14 +26,13 @@ func do(c chan interface{}) {
 }
 
 func main() {
-	hub := &hub{make(chan interface{}), make(chan interface{})}
+	hub := &hub{make(chan interface{})}
 	go func() {
-		hub.C1 <- A{"jaseHuang"}
-		hub.C2 <- B{25}
+		hub.C <- A{"jaseHuang"}
+		hub.C <- B{25}
 	}()
 
-	go do(hub.C1)
-	go do(hub.C2)
+	go do(hub.C)
 	for {
 	}
 }
