@@ -1,4 +1,4 @@
-### golang社群解答紀錄
+### golang中文社群解答紀錄
 
 * 標題：新手请问这种情况如何有效复用代码  
 https://studygolang.com/topics/9596#reply0  
