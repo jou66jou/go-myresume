@@ -11,3 +11,7 @@
 * 標題：咨询类似这种这么过滤呢  
 https://studygolang.com/topics/9605#reply0  
 解答：過濾`\t`  
+
+* 信道定义了写入，没有定义读取，为什么没有死锁
+https://studygolang.com/topics/965
+解答：deadlock 檢測器是可以被欺騙的
