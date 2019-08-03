@@ -15,3 +15,7 @@ https://studygolang.com/topics/9605#reply0
 * 信道定义了写入，没有定义读取，为什么没有死锁
 https://studygolang.com/topics/965
 解答：deadlock 檢測器是可以被欺騙的
+
+* golang在并发下GOMAXPROCS(1)
+https://studygolang.com/articles/22416#reply0
+解答：單處理器下goroutine仍有被掛起機會
