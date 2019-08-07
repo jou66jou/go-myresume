@@ -19,7 +19,7 @@
 │   │   │   └── app.ini         # config文件
 │   │   └── setting.go          # config初始設定
 │   ├── initdb                  
-│       └── p2p.ws.go           # sql init
+│   │   └── p2p.ws.go           # sql init
 │   └── user                    * 一般使用者相關功能
 │       └── user.go             # 登入、註冊、查詢方法
 │── practice                    * 特定練習
@@ -27,7 +27,8 @@
 │   ├── p2p-websocket           # websocket模擬p2p
 │   │   └── p2p.ws.go 
 │   └── testinterface           # interface練習      
-│
+│── regular                    
+│   └─── README.md              # 正則相關
 └── studygolang.md              # golang中文社群回覆紀錄      
 ```
 
