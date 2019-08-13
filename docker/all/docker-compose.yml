@@ -1,0 +1,99 @@
+version: '2'
+services:
+  grafana:
+    image: grafana/grafana
+    ports:
+      - 3000:3000
+    environment:
+      GF_INSTALL_PLUGINS: percona-percona-app
+    networks:
+      - proxy-netowrk
+
+  adminer:
+    container_name: adminer
+    image: adminer
+    ports:
+      - 8001:8080
+    networks:
+      - proxy-netowrk
+
+  redis-commander:
+    container_name: redis-commander
+    networks:
+      - proxy-netowrk
+    hostname: redis-commander
+    image: rediscommander/redis-commander:latest
+    restart: always
+    environment:
+      - REDIS_HOSTS=redis:redis:6379:0:yourpassword
+    ports:
+      - "8081:8081"
+
+  nsqlookupd:
+    image: nsqio/nsq
+    command: /nsqlookupd
+    networks:
+      - proxy-netowrk
+    hostname: nsqlookupd
+    ports:
+      - "4161:4161"
+      - "4160:4160"
+
+  nsqd:
+    image: nsqio/nsq
+    command: /nsqd --lookupd-tcp-address=nsqlookupd:4160
+    depends_on:
+      - nsqlookupd
+    hostname: nsqd
+    networks:
+      - proxy-netowrk
+    ports:
+      - "4151:4151"
+      - "4150:4150"
+
+  nsqadmin:
+    image: nsqio/nsq
+    command: /nsqadmin --lookupd-http-address=nsqlookupd:4161
+    depends_on:
+      - nsqlookupd
+    hostname: nsqadmin
+    ports:
+      - "4171:4171"
+    networks:
+      - proxy-netowrk
+
+  mysql:
+    container_name: mysql
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+    ports:
+     - 3306:3306
+    networks:
+      - proxy-netowrk
+
+  redis:
+    container_name: redis
+    command: redis-server --requirepass yourpassword
+    image: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - proxy-netowrk
+
+  memcached:
+    image: memcached
+    ports:
+      - "11211:11211"
+    environment:
+      - MEMCACHED_USERNAME=jim
+      - MEMCACHED_PASSWORD=password
+    networks:
+      - proxy-netowrk
+
+
+networks:
+  proxy-netowrk:
+    driver: bridge

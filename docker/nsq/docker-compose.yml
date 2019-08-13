@@ -1,26 +1,36 @@
-nsqlookup:
-  image: nsqio/nsq
-  hostname: nl
-  ports:
-    - "4160:4160"
-    - "4161:4161"
-  command: /nsqlookupd
+version: '2'
+services:
+  nsqlookupd:
+    image: nsqio/nsq
+    command: /nsqlookupd
+    networks:
+      - nsq-network
+    hostname: nsqlookupd
+    ports:
+      - "4161:4161"
+      - "4160:4160"
+  nsqd:
+    image: nsqio/nsq
+    command: /nsqd --lookupd-tcp-address=nsqlookupd:4160
+    depends_on:
+      - nsqlookupd
+    hostname: nsqd
+    networks:
+      - nsq-network
+    ports:
+      - "4151:4151"
+      - "4150:4150"
+  nsqadmin:
+    image: nsqio/nsq
+    command: /nsqadmin --lookupd-http-address=nsqlookupd:4161
+    depends_on:
+      - nsqlookupd
+    hostname: nsqadmin
+    ports:
+      - "4171:4171"
+    networks:
+      - nsq-network
 
-nsq:
-  image: nsqio/nsq
-  hostname: nsq
-  ports:
-    - "4150:4150"
-    - "4151:4151"
-  links:
-    - nsqlookup:nsqlookup
-  command: /nsqd --broadcast-address nsq --lookupd-tcp-address=nsqlookup:4160
-
-nsqadmin:
-  image: nsqio/nsq
-  hostname: nd
-  links:
-    - nsqlookup:nsqlookup
-  ports:
-    - "4171:4171"
-  command: /nsqadmin --lookupd-http-address=nsqlookup:4161
+networks:
+  nsq-network:
+    driver: bridge
