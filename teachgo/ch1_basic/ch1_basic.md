@@ -6,7 +6,7 @@ https://docs.google.com/presentation/d/1H0AOn_BquDLDvRer-ObzCoY0bSWrR18zI-bVTVTX
 Golang變數基本有以下型態：
 
 ```go
-    // 正整數
+	// 正整數
 	var postivInt uint = 100
 	fmt.Println(postivInt)
 
