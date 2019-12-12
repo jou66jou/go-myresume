@@ -31,7 +31,7 @@ func main() {
 					// 	ipnet.IP[15],
 					// 	ipnet.IP[14])
 				}
-				fmt.Printf("ipnet : %v\n", ipnet.String())
+				fmt.Printf("ipnet : %+v\n", ipnet)
 			}
 		}
 	}
