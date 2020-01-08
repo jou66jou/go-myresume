@@ -2,8 +2,9 @@ package main
 
 import (
 	"log"
+	"net"
+	"strings"
 
-	"github.com/jou66jou/go-myresume/practice/webview/internal/command"
 	"github.com/zserge/webview"
 )
 
@@ -16,16 +17,28 @@ var (
 )
 
 func main() {
-	address, err := command.GetIP()
+	// address, err := command.GetIP()
+	// if err != nil {
+	// 	log.Println("get ip fail : ", err)
+	// }
+	// if len(address) == 0 {
+	// 	log.Println("not found local ip address")
+	// }
+	// for i := range address {
+	// 	log.Printf("address %v : %s", i, address[i])
+	// }
+	conn, err := net.Dial("udp", "8.8.8.8:80")
+	// handle err...
 	if err != nil {
-		log.Println("get ip fail : ", err)
+		log.Printf("net.Dial get err : %v", err)
+		return
 	}
-	if len(address) == 0 {
-		log.Println("not found local ip address")
-	}
-
+	defer conn.Close()
+	localAddr := conn.LocalAddr().(*net.UDPAddr)
+	ip := strings.Split(localAddr.String(), ":")
+	log.Println(ip[0])
 	// just start a webview
-	stratWebView(address[0])
+	stratWebView(ip[0])
 
 	// // if you want close webview by process
 	// var done chan bool
