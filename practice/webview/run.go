@@ -1,8 +1,12 @@
 package main
 
 import (
+	"bufio"
+	"fmt"
 	"log"
 	"net"
+	"os"
+	"strconv"
 	"strings"
 
 	"github.com/zserge/webview"
@@ -14,19 +18,10 @@ const (
 
 var (
 	version string
+	w, h    int
 )
 
 func main() {
-	// address, err := command.GetIP()
-	// if err != nil {
-	// 	log.Println("get ip fail : ", err)
-	// }
-	// if len(address) == 0 {
-	// 	log.Println("not found local ip address")
-	// }
-	// for i := range address {
-	// 	log.Printf("address %v : %s", i, address[i])
-	// }
 	conn, err := net.Dial("udp", "8.8.8.8:80")
 	// handle err...
 	if err != nil {
@@ -37,6 +32,35 @@ func main() {
 	localAddr := conn.LocalAddr().(*net.UDPAddr)
 	ip := strings.Split(localAddr.String(), ":")
 	log.Println(ip[0])
+
+	file, err := os.Open("webview/config.txt")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		fmt.Println(scanner.Text())
+		tmp := strings.Split(scanner.Text(), "=")
+		switch tmp[0] {
+		case "hight":
+			h, err = strconv.Atoi(tmp[1])
+			if err != nil || h == 0 {
+				h = 1024
+			}
+		case "wight":
+			w, err = strconv.Atoi(tmp[1])
+			if err != nil || w == 0 {
+				w = 768
+			}
+		}
+	}
+
+	if err := scanner.Err(); err != nil {
+		log.Fatal(err)
+	}
+
 	// just start a webview
 	stratWebView(ip[0])
 
@@ -60,10 +84,12 @@ func stratWebView(address string) {
 
 	webView := webview.New(webview.Settings{
 		URL:                    "http://" + address + ":1323/",
-		Width:                  500,
-		Height:                 800,
-		Resizable:              true,
+		Width:                  h,
+		Height:                 w,
+		Title:                  "機車排氣檢驗系統",
 		ExternalInvokeCallback: nil,
+		Debug:                  true,
 	})
+
 	webView.Run()
 }
